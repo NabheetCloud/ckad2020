@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotaton-pod
+  annotations:
+    owner: test@gmail.com
+    git-commit: tetst
+  labels:
+    app: my-app
+    environment: production
+spec:
+ containers:
+ - name: label-nginx
+   image: nginx

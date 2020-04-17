@@ -33,3 +33,54 @@ kubectl describe
 kubectl get pod <podname> -o yaml --export > <filename>
 ```
 - Implement readiness and liveness probe also to find root cause
+
+## Day 7
+
+### Lables, annotations selector, Deployment, rolling update and Cronjobs
+
+- Lables is like rather than regfering pods by names etc you can apply filter select via lables. where as annotation is like metadata
+```yaml
+kubectl describe pod my-production-label-pod
+kubectl get pods -l app=my-app
+
+kubectl get pods -l environment=production
+
+kubectl get pods -l environment=development
+
+kubectl get pods -l environment!=production
+
+kubectl get pods -l 'environment in (development,production)'
+
+kubectl get pods -l app=my-app,environment=production
+kubectl describe pod my-annotation-pod
+```
+
+- Deployment is like you define how many pods should be running at time.Deployments provide a variety of features to help you automatically manage groups of replica pods.
+
+```yaml
+kubectl get deployments
+
+kubectl get deployment <deployment name>
+
+kubectl describe deployment <deployment name>
+
+kubectl edit deployment <deployment name>
+
+kubectl delete deployment <deployment name>
+```
+- Rolling updates when u need to upgrade things or rollback to move any step becoz of issue
+
+```yaml
+kubectl set image deployment/rolling-deployment nginx=nginx:1.7.9 --record
+kubectl rollout history deployment/rolling-deployment
+
+kubectl rollout history deployment/rolling-deployment --revision=2
+kubectl rollout undo deployment/rolling-deployment
+kubectl rollout undo deployment/rolling-deployment --to-revision=1
+```
+- Jobs and cron jobs - job run for once and cron as always scheudled
+
+```
+kubectl get jobs
+kubectl get cronjobs
+```

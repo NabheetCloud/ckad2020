@@ -533,3 +533,168 @@
   533  history
   534  cd ..
   535  history > day1_day6.txt
+  536  ls
+  537  history
+  538  history -h
+  539  history --help
+  540  history
+  541  history [-c]
+  542  istory -c.
+  543  history -c.
+  544  history
+  545  clear
+  546  history
+  547  hisotry
+  548  history
+  549  sudo history -c
+  550  history -d
+  551  history
+  552  pwd
+  553  cd k8s
+  554  git status
+  555  git add .
+  556  git commit -m "command history of day1 to day6"
+  557  git push
+  558  clear
+  559  cd Day7
+  560  cd day7
+  561  clear
+  562  vi my-label-pod.yml
+  563  cp my-label-pod.yml ../template.yml
+  564  cd ..
+  565  ls
+  566  cd day7
+  567  vi my-label-pod.yml
+  568  kubectl apply -f my-lable-pod.yml
+  569  kubectl apply -f my-label-pod.yml
+  570  vi my-label-pod.yml
+  571  kubectl apply -f my-label-pod.yml
+  572  kubectl get pods
+  573  kubectl get pods --show-labels
+  574  kubectl describe label-pod
+  575  kubectl describe pod label-pod
+  576  ls
+  577  cp my-label-pod.yml my-label-pod-dev.yml
+  578  vi my-label-pod-dev.yml
+  579  kubectl apply -f  my-label-pod-dev.yml
+  580  kubectl get pods
+  581  kubectl get pods --show-label
+  582  kubectl get pods --show-labels
+  583  kubectl get pods -l app=my-app
+  584  kubectl get pods -l environment=development
+  585  kubectl get pods -l environment=production
+  586  kubectl get pods -l environment!=production
+  587  kubectl get pods -l environment!=production --show-labels
+  588  kubectl get pods -l 'environment in (production)'
+  589  kubectl get pods -l 'environment in (production,development)'
+  590  kubectl get pods -l 'environment in (production,development)' --show-labels
+  591  kubectl get pods -l app=my-app, environment=development
+  592  kubectl get pods -l app=my-app,environment=development
+  593  ls
+  594  cp my-label-pod.yml annotation.yml
+  595  vi annotation.yml
+  596  kubectl apply -f annotation.yml
+  597  kubectl get pods
+  598  kubectl describe pod annotator-pod
+  599  kubectl describe pod annotaton-pod
+  600  cd ..
+  601  history
+  602  ls
+  603  history > day1_day6.txt
+  604  git status
+  605  git diff
+  606  git diff > testdiff.text
+  607  clear
+  608  cd day7
+  609  vi deployment.yaml
+  610  kubectl apply -f deployment.yaml
+  611  vi deployment.yaml
+  612  kubectl apply -f deployment.yaml
+  613  kubectl get pods
+  614  kubectl get pods --show-labels
+  615  kubectl get pods --show-labels -l app=nginx-dep1
+  616  kubectl get pods
+  617  kubectl get deployments
+  618  clear
+  619  vi deployment.yaml
+  620  kubectl apply -f deployment.yaml
+  621  kubectl get pods
+  622  kubectl get pods --show-labels
+  623  kubectl get pods --show-labels -l app=nginx-dep2
+  624  clear
+  625  vi deployment.yaml
+  626  kubectl set image Deployment/deploy-rolling nginx=nginx:1.7.9 --record
+  627  kubectl get pods -w
+  628  kubectl get pods -w --show-labels 
+  629  clear
+  630  kubectl get pods --show-labels
+  631  kubectl get pods --show-labels -l app=nginx-dep2
+  632  kubectl rollout history Deployment/deploy-rolling
+  633  kubectl rollout history Deployment/deploy-rolling --revision=2
+  634  kubectl rollout undo deployment/deploy-rolling 
+  635  kubectl get pods --show-labels -l app=nginx-dep2 -w
+  636  clear
+  637  cd ..
+  638  ls
+  639  cd day7
+  640  cp ../template.yml job.yml
+  641  vi job.yml
+  642  kubectl apply -f job.yml
+  643  vi job.yml
+  644  kubectl apply -f job.yml
+  645  vi job.yml
+  646  kubectl apply -f job.yml
+  647  vi job.yml
+  648  kubectl apply -f job.yml
+  649  vi job.yml
+  650  kubectl apply -f job.yml
+  651  kubectl get jobs
+  652  kubectl get pod
+  653  kubectl logs job1-djrqk
+  654  cp job.yml cron-job.yml
+  655  vi cron-job.yml
+  656  clear
+  657  echo -n "thoughtram" | openssl sha1
+  658  git -h
+  659  git help
+  660  git commit help
+  661  git help commit
+  662  git --h amend
+  663  git amend --help
+  664  git help amend
+  665  git help -g
+  666  git help everyday
+  667  cd k8s
+  668  cd day7
+  669  ls
+  670  vi cron-job.yml
+  671  kubectl apply -f cron-job.yml
+  672  vi cron-job.yml
+  673  kubectl apply -f cron-job.yml
+  674  kubectl get cronjob
+  675  kubectl get cronjob -w
+  676  kubeclt get pods
+  677  kubectl get pods
+  678  kubectl get cronjob 
+  679  kubectl describe pod cronjob1-1587123900-fxbv7 
+  680  kubectl edit cronjob cronjob1
+  681  kubectl get cronjob 
+  682  kubectl get pods
+  683  kubectl logs cronjob1-1587124020-zdbcm
+  684  history 
+  685  history >day1_day6.txt
+  686  git diff
+  687  git diff diff --git a/day1_day6.txt b/day1_day6.txt
+  688  diff --git a/day1_day6.txt b/day1_day6.txt
+  689  git diff  a/day1_day6.txt b/day1_day6.txt
+  690  git diff  day1_day6.txt
+  691  git diff day1_day6.txt
+  692  git diff HEAD~1
+  693  git diff HEAD~1 --day1_day6.txt
+  694  git log --oneline day1_day6.txt
+  695  git log day1_day6.txt
+  696  cd ..
+  697  git log --oneline day1_day6.txt
+  698  git diff f7a0dd9 day1_day6.txt
+  699  history
+  700  history > day1_day6.txt

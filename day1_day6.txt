@@ -1,0 +1,535 @@
+    1  clear
+    2  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    3  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    4     $(lsb_release -cs) \
+    5     stable"
+    6  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    7  cat << EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    8  deb https://apt.kubernetes.io/ kubernetes-xenial main
+    9  EOF
+   10  sudo apt-get update
+   11  sudo apt-get install -y docker-ce=18.06.1~ce~3-0~ubuntu kubelet=1.13.5-00 kubeadm=1.13.5-00 kubectl=1.13.5-00
+   12  sudo apt-mark hold docker-ce kubelet kubeadm kubectl
+   13  echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
+   14  sudo sysctl -p
+   15  sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+   16  mkdir -p $HOME/.kube
+   17  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   18  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   19  kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
+   20  kubectl get nodes
+   21  kubectl api-resources
+   22  kubectl api-resources -o name
+   23  kubectl get pods
+   24  cls
+   25  kubectl get namespaces
+   26  kubectl get pods -n kube-system
+   27  kubectl get nodes
+   28  kubectl get node nabheetsap1c.mylabserver.com
+   29  kubectl get node nabheetsap1c.mylabserver.com -o yaml
+   30  pwd
+   31  ls
+   32  vi my-pod.yml
+   33  kubectl create -f my-pod.yml
+   34  kubectl get pods
+   35  kubectl describe pod my-pod
+   36  kubectl delete pod my-pod
+   37  cp my-pod.yml to my-ns-pod.yml
+   38  cp my-pod.yml  my-ns-pod.yml
+   39  ls
+   40  vi my-ns-pod.yml
+   41  kubectl get ns
+   42  kubectl get namespaces
+   43  kubectl create ns my-ns
+   44  kubectl get namespaces
+   45  vi my-ns-pod.yml
+   46  kubectl create -f my-ns-pod.yml
+   47  vi my-ns-pod.yml
+   48  kubectl create -f my-ns-pod.yml
+   49  kubectl get pods
+   50  kubectl set
+   51  kubectl get env
+   52  kubectl get pods -n my-ns
+   53  clear
+   54  ls
+   55  cp my-pod.yml my-pod-cmd.yml
+   56  vi my-pod-cmd.yml
+   57  kubectl create -f my-pod-cmd.yml
+   58  kubectl get pods
+   59  vi my-pod-cmd.yml
+   60  clear
+   61  cls
+   62  ls
+   63  vi my-pod-cmd.yml
+   64  kubectl create -f my-pod-cmd.yml
+   65  kubectl get pods
+   66  kubectl delete pod my-pod
+   67  kubectl create -f my-pod-cmd.yml
+   68   kubectl get pods
+   69  cp my-pod.yml my-pod-port.yml
+   70  vi my-pod-port.yml
+   71  cls
+   72  clear
+   73  ls
+   74  vi my-pod-port.yml
+   75  kubectl create -f my-pod-port.yml
+   76  ls
+   77  kubectl get pods
+   78  curl http://localhost:80
+   79  kubectl describe pod my-cp-pod
+   80  172.31.33.69:80
+   81  curl 172.31.33.69:80
+   82  cls
+   83  vi creat-pod-l1.yml
+   84  kubectl create namespace web
+   85  kubectl create -f creat-pod-l1.yml
+   86  vi creat-pod-l1.yml
+   87  kubectl create -f creat-pod-l1.yml
+   88  cls
+   89  kubectl get pods
+   90  kubectl get pods -n web
+   91  vi creat-pod-l1.yml
+   92  kubectl delete pod nginx
+   93  kubectl delete pod nginx -n web
+   94  kubectl get pods -n web
+   95  kubectl create -f creat-pod-l1.yml
+   96  kubectl get pods -n web
+   97  kubectl describe pod nginx -n web
+   98  kubectl get logs
+   99  kubectl delete pod nginx -n web
+  100  vi creat-pod-l1.yml
+  101  ls
+  102  kubectl create -f creat-pod-l1.yml
+  103  kubectl get pods -n web
+  104  kubectl get pods
+  105  kubectl delete pods my-cp-pod my-pod
+  106  clear
+  107  kubectl get pods -n web
+  108  kubectl describe pod nginx 
+  109  kubectl describe pod nginx -n web
+  110  kubectl logs -p nginx -n web
+  111  vi creat-pod-l1.yml
+  112  kubectl delete pod nginx -n web
+  113  kubectl create -f creat-pod-l1.yml
+  114  kubectl get pods -n web
+  115  kubectl logs -p nginx -n web
+  116  clear
+  117  vi config-map.yml
+  118  kubectl create -f config-map.yml
+  119  vi pod-config-map.yml
+  120  vi config-map.yml
+  121  vi pod-config-map.yml
+  122  kubectl create -f pod-config-map.yml
+  123  kubectl get pods
+  124  kubectl logs my-pod-configmap
+  125  vi my-configmap-vol-pod.yml
+  126  kubectl apply -f  my-configmap-vol-pod.yml
+  127  vi my-configmap-vol-pod.yml
+  128  kubectl apply -f  my-configmap-vol-pod.yml
+  129  kubectl get pods
+  130  kubect logs my-configmap-vol-pod
+  131  kubectl logs my-configmap-vol-pod
+  132  vi my-configmap-vol-pod.yml
+  133  kubectl apply -f  my-configmap-vol-pod.yml
+  134  kubectl get pods
+  135  kubectl delete pod my-configmap-vol-pod
+  136  kubectl apply -f  my-configmap-vol-pod.yml
+  137  kubectl create -f  my-configmap-vol-pod.yml
+  138  kubectl get pods
+  139  kubectl create -f  my-configmap-vol-pod.yml
+  140  kubectl get pods
+  141  kubectl logs my-configmap-vol-pod
+  142  kubectl exec my-configmap-vol-pod -- ls /etc/confi
+  143  kubectl exec my-configmap-vol-pod -- ls /etc/config
+  144  kubectl exec my-configmap-vol-pod -- cat /etc/config/myKey
+  145  clear
+  146  kubectl exec my-configmap-vol-pod -- cat /etc/config/myKey
+  147  clear
+  148  ls
+  149  vi my-configmap-vol-pod.yml
+  150  vi my-securitycontext-pod.yml
+  151  kubectl apply -f my-securitycontext-pod.yml
+  152  kubectl get pods
+  153  kubectl logs my-securitycontext-pod
+  154  vi my-securitycontext-pod.yml
+  155  kubectl apply -f my-securitycontext-pod.yml
+  156  clear
+  157  kubectl get pods
+  158  kubectl delete pod my-securitycontext-pod
+  159  kubectl apply -f my-securitycontext-pod.yml
+  160  kubectl get pods
+  161  kubectl logs my-securitycontext-pod
+  162  kubectl exec my-securitycontext-pod -- ps
+  163  kubectl exec my-securitycontext-pod 
+  164  kubectl exec my-securitycontext-pod -- ls
+  165  clear
+  166  kubectl exec my-securitycontext-pod -- cat /message/message.txt
+  167  kubectl delete pod my-securitycontext-pod
+  168  vi my-securitycontext-pod.yml
+  169  kubectl apply -f my-securitycontext.pod.yml
+  170  kubectl apply -f my-securitycontext-pod.yml
+  171  kubectl get pods
+  172  kubectl get logs my-securitycontext-pod
+  173  kubectl logs my-securitycontext-pod
+  174  kubectl get pods
+  175  kubectl delete pod my-securitycontext-pod --npw
+  176  clear
+  177  kubectl delete pod my-securitycontext-pod --now
+  178  vi my-securitycontext-pod.yml
+  179  kubectl apply -f my-securitycontext-pod.yml
+  180  kubectl get pods
+  181  kubectl logs my-securitycontext-pod
+  182  vi my-resource-pod.yml
+  183  kubectl create -f my-resource-pod.yml
+  184  kubectl get pods
+  185  vi my-resource-pod.yml
+  186  kubectl describe busybox-sleep-less
+  187  kubectl describe pod busybox-sleep-less
+  188  clear
+  189  kubectl get pods -all-namespace
+  190  kubectl get pods --all-namespace
+  191  clear
+  192  kubectl get pods -h
+  193  clear
+  194  kubectl get pods --all-namespaces
+  195  kubectl descrbe pod coredns-54ff9cd656-kwpt6
+  196  kubectl describe pod coredns-54ff9cd656-kwpt6
+  197  kubectl describe pod coredns-54ff9cd656-kwpt6 -n kube-system
+  198  clear
+  199  vi my-secret.yml
+  200  kubectl create -f my-secret.yml
+  201  vi my-secret-pod.yml
+  202  kubectl apply -f my-secret-pod.yml
+  203  vi my-secret-pod.yml
+  204  kubectl apply -f my-secret-pod.yml
+  205  kubectl create -f my-secret-pod.yml
+  206  vi my-secret-pod.yml
+  207  kubectl create -f my-secret-pod.yml
+  208  vi my-secret-pod.yml
+  209  kubectl create -f my-secret-pod.yml
+  210  clear
+  211  kubectl create -f my-secret-pod.yml
+  212  clear
+  213  vi my-secret-pod.yml
+  214  kubectl create -f my-secret-pod.yml
+  215  vi my-secret-pod.yml
+  216  kubectl get pods
+  217  kubectl logs my-secreat-pod
+  218  vi my-secret-pod.yml
+  219  kubectl delete pod my-secreat-pod --now
+  220  kubectl create -f my-secret-pod.yml
+  221  kubectl logs my-secreat-pod
+  222  kubectl create serviceaccount my-serviceaccount
+  223  vi my-serviceaccount-pod.yml
+  224  kubectl create -f my-serviceaccount-pod.yml
+  225  vi my-serviceaccount-pod.yml
+  226  kubectl create -f my-serviceaccount-pod.yml
+  227  kubectl get pods
+  228  clear
+  229  vi candy-service-config.yml
+  230  ls
+  231  vi config-map.yml
+  232  kubcectl create -f candy-service-config.yml
+  233  kubectl create -f candy-service-config.yml
+  234  vi candy-service-config.yml
+  235  kubectl create -f candy-service-config.yml
+  236  kubectl get configmaps
+  237  vi db-password-secret.yml
+  238  kubectl create -f db-password-secret.yml
+  239  vi candy-service-pod.yml.
+  240  vi candy-service-pod.yml
+  241  kubectl create -f candy-service-pod.yml
+  242  vi candy-service-pod.yml
+  243  kubectl create -f candy-service-pod.yml
+  244  vi candy-service-pod.yml
+  245  kubectl create -f candy-service-pod.yml
+  246  vi candy-service-pod.yml
+  247  kubectl create -f candy-service-pod.yml
+  248  kubcetl create serviceaccount candy-svc
+  249  kubectl create serviceaccount candy-svc
+  250  kubectl create -f candy-service-pod.yml
+  251  clear
+  252  kubectl create -f candy-service-pod.yml
+  253  kubectl get pods
+  254  kubectl delete pod candy
+  255  ls
+  256  mkdir k8s
+  257  ls
+  258  cd  k8s
+  259  mkdir day1
+  260  mkdir day2
+  261  mkdir day3
+  262  cd..
+  263  cd ..
+  264  mv my-ns-pod.yml to ./k8s/days1
+  265  mv my-ns-pod.yml to ./k8s/day1
+  266  mv my-ns-pod.yml  ./k8s/day1
+  267  mv ./my-ns-pod.yml  ./k8s/day1
+  268  mv *.yml ./k8s
+  269  ls
+  270  clr
+  271  cd kclear
+  272  clear
+  273  ls
+  274  cd k8s
+  275  clear
+  276  ls
+  277  mv my-pod.yml day1
+  278  mv my-configmap-vol-pod.yml day2
+  279  clear
+  280  ls
+  281  mv config-map.yml day2
+  282  mv db-password-secret.yml day3
+  283  mv my-secret-pod.yml day3
+  284  ls
+  285  mv candy-service-config.yml candy-service-pod.yml day3
+  286  ls
+  287  mv my-pod-cmd.yml my-pod-port.yml pod-config-map.yml day2
+  288  ls
+  289  mv create-pod-l1.yml day1
+  290  mv *.yml day3
+  291  ls
+  292  git init
+  293  git status
+  294  git add .
+  295  git commit -m "Three days work"
+  296  clear
+  297  git commit -m "Three days work"
+  298  git config --global user.email "nabheet.cloud@gmail.com" user.name "nabheetcloud"
+  299  clear
+  300  git config --global user.email "nabheet.cloud@gmail.com" 
+  301  git config --global user.name "nabheetcloud" 
+  302  git commit -m "Pod, configmap, secrets, ns"
+  303  git remote add origin https://github.com/NabheetCloud/ckad2020.git
+  304  git push -u origin master
+  305  echo "# CKAD Prep" > README.md
+  306  git add .
+  307  git commit  -m "Update Readme"
+  308  git push -u origin master
+  309  clear
+  310  cd k9s
+  311  cd k8s
+  312  ls
+  313  git status
+  314  git push -u origin master
+  315  cd day3
+  316  vi multi-pod.yml
+  317  kubectl create -f multi-pod.yml
+  318  vi multi-pod.yml
+  319  kubectl create -f multi-pod.yml
+  320  vi multi-pod.yml
+  321  kubectl create -f multi-pod.yml
+  322  kubectl get pods
+  323  git logs
+  324  git log
+  325  git log -h
+  326  git log --decorate -h
+  327  git show -h
+  328  git status
+  329  git add .
+  330  git commit -m "Day3 done secrets, configmap, multicontainer"
+  331  git push -u origin master
+  332  clr
+  333  clear
+  334  git -h
+  335  git -help
+  336  git --help
+  337  git log
+  338  clr
+  339  clear
+  340  git log
+  341  cd k8s
+  342  git log
+  343  git log -graph
+  344  git log --graph
+  345  git log --graph --decorate --oneline
+  346  git diff
+  347  git help config
+  348  git config help
+  349  git config -help
+  350  clear
+  351  cd k8s
+  352  ls
+  353  mkdir day4
+  354  cd day4
+  355  cls
+  356  clear
+  357  vi fruit-service.yml
+  358  vi fruit-map.yml
+  359  kubectl apply -f fruit-map.yml
+  360  vi fruit-service.yml
+  361  kubectl apply -f fruit-service.yml
+  362  vi fruit-service.yml
+  363  kubectl apply -f fruit-service.yml
+  364  vi fruit-service.yml
+  365  kubectl apply -f fruit-service.yml
+  366  vi fruit-service.yml
+  367  kubectl apply -f fruit-service.yml
+  368  vi fruit-service.yml
+  369  kubectl apply -f fruit-service.yml
+  370  vi fruit-service.yml
+  371  kubectl apply -f fruit-service.yml
+  372  kubectl get pods
+  373  vi busybox.yml
+  374  kubectl apply -f busybox.yml
+  375  vi busybox.yml
+  376  kubectl apply -f busybox.yml
+  377  kubectl exec busybox -- curl $(kubectl get pod fruit-service -o=custom-columns=IP:.status.podIP --no-headers):80
+  378  docker
+  379  docker ps
+  380  sudo docker ps
+  381  kubectl get pod fruit-service
+  382  kubectl get pod fruit-service -o=custom-columns=IP:.status.podIP
+  383  kubectl get pod fruit-service -o=custom-columns=IP:.status.podIP --no-headers
+  384  kubectl get pod fruit-service -h
+  385  clear
+  386  vi my-liveness-pod.yml
+  387  kubectl my-livenss-pod.yml
+  388  kubectl apply -f  my-livenss-pod.yml
+  389  kubectl apply -f  my-liveness-pod.yml
+  390  vi my-liveness-pod.yml
+  391  kubectl apply -f  my-liveness-pod.yml
+  392  kubectl get pods
+  393  kubectl logs liveness-probe
+  394  cp my-liveness-pod.yml my-ready-pod.yml
+  395  vi my-ready-pod.yml
+  396  kubectl apply -f my-ready-pod.yml
+  397  kubectl get pods
+  398  kubectl logs readiveness-probe
+  399  kubectl get pods
+  400  kubectl get pods -h
+  401  kubectl get pods -o -h
+  402  kubectl get pods -o=custom-columns:Name
+  403  kubectl get pods -o=custom-columns Name
+  404  kubectl get pods -o=custom-columns -h
+  405  kubectl get pods - name
+  406  kubectl get pods -o name
+  407  kubectl delete pod -h
+  408  kubectl delete pod $(kubectl get pods -o name)
+  409  git status
+  410  cd ..
+  411  git status
+  412  git Add .
+  413  git add .
+  414  git commit -m "Ambassdor, probes"
+  415  git push -u origin master
+  416  ls
+  417  cd k8s
+  418  git status
+  419  ls
+  420  mkdir day5
+  421  cd day5
+  422  clear
+  423  vi counter.yml
+  424  kubectl apply -f counter.yml
+  425  kubectl get pods
+  426  kubectl logs counter
+  427  kubectl get pods
+  428  kubectl describe pod counter
+  429  kubectl logs counter -c docker://4d02a679559d51851d2196bac74f1fddef0c9fe18988275753ce18ffaba087d3
+  430  kubectl logs counter -c counter-container
+  431  kubectl get pods
+  432  kubectl logs counter -c counter-container
+  433  kubectl logs counter -c counter-container > counter.log
+  434  ls -l
+  435  kubectl get pods
+  436  kubectl delete pod counter
+  437  cd ~/
+  438  cls
+  439  clear
+  440  git clone https://github.com/linuxacademy/metrics-server
+  441  kubectl apply -f ~/metrics-server/deploy/1.8+/
+  442  kubectl get --raw /apis/metrics.k8s.io/
+  443  kubectl top
+  444  kubectl top pod
+  445  kubectl top node
+  446  cd k8s/day5
+  447  vi big-resource.yml
+  448  kubectl apply -f big-resource.yml
+  449  vi small-resource.yml
+  450  kubectl apply -f small-resource.yml
+  451  kubectl get pods
+  452  kubectl top pods
+  453  kubectl pods
+  454  kubectl top pods
+  455  kubectl delete pod resource-consumer-big resource-consumer-small
+  456  clear
+  457  cd k8s
+  458  git status
+  459  git add .
+  460  git commit -m " Day 5 logging and metrix"
+  461  git push -u origin master
+  462  mkdir day 6
+  463  rmdir day 6
+  464  mkdir day6
+  465  git status
+  466  ls
+  467  vi README.md
+  468  git status
+  469  git diff
+  470   git add README.md
+  471  git status
+  472  git diff
+  473  git reset README.pd
+  474  git status
+  475  git reset HEAD README.md
+  476  git statuts
+  477  git status
+  478  git add .
+  479  git reset HEAD .
+  480  git status
+  481  clear
+  482  kubectl create namespace nginx-ns
+  483  ls
+  484  cd day6
+  485  vi broken-pod.yml
+  486  kubectl create -f broken-pod.yml
+  487  vi broken-pod.yml
+  488  kubectl create -f broken-pod.yml
+  489  cls
+  490  clear
+  491  kubectl get pods
+  492  kubectl get pods -n nginx-ns
+  493  kubectl get pods --all-namespaces
+  494  kubectl describe pod nginx - n nginx-ns
+  495  clear
+  496  kubectl describe pod nginx - n nginx-ns
+  497  kubectl get pods -n nginx-ns
+  498  kubectl describe pod nginx -n nginx-ns
+  499  kubectl edit pod nginx -n nginx-ns
+  500  kubectl get pods -n nginx-ns
+  501  kubectl get pod nginx -n nginx-ns -o yaml --export
+  502  kubectl get pod nginx -n nginx-ns -o yaml --export > correct-pod.yml
+  503  lks
+  504  ls
+  505  vi correct-pod.yml
+  506  kubectl delete pod nginx -n nginx-ns
+  507  kubectl apply -f correct-pod.yml
+  508  kubectl get pods -n nginx-ns
+  509  kubectl get pods
+  510  kubectl apply -f correct-pod.yml -n nginx-ns
+  511  kubectl get pods
+  512  kubectl get pods -n nginx-ns
+  513  kubectl logs nginx -n nginx-ns
+  514  ~~clear
+  515  clear
+  516  vi lab-probe.yml
+  517  clear
+  518  cd k8s
+  519  git status
+  520  git add .
+  521  git commit -m "Day 6 debugging and probes"
+  522  git push
+  523  clear
+  524  mkdir day7
+  525  cd day6
+  526  cd //
+  527  pwd
+  528  cd /home/cloud_user
+  529  ls
+  530  cd k8s
+  531  cd day7
+  532  clear
+  533  history
+  534  cd ..
+  535  history > day1_day6.txt

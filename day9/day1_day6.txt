@@ -836,10 +836,3 @@
   836  kubectl exec network-policy-client-pod -- curl 10.244.1.107
   837  history
   838  history > day1_day6.txt
-  839  git diff
-  840  git diff --staged
-  841  git status
-  842  git add .
-  843  git diff
-  844  cd ..
-  845  history > day1_day6.txt

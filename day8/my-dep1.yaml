@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: day8-nginx
+  name: day8-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: day8-app 
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: day8-app
+    spec:
+      containers:
+      - image: nginx:1.7.9
+        name: day8-nginx
+        ports: 
+        - containerPort: 80
+        resources: {}
+status: {}

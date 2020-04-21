@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: network-policy-client-pod
+  name: network-policy-client-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: network-policy-client-pod
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: network-policy-client-pod
+    spec:
+      containers:
+      - image: radial/busyboxplus:curl
+        name: network-policy-client-pod
+        command: ['/bin/sh','-c','while true; do sleep 3600; done']
+        resources: {}
+status: {}

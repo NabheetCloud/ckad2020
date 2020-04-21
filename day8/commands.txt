@@ -1,0 +1,153 @@
+diff --git a/day1_day6.txt b/day1_day6.txt
+index b9ea519..706d5d3 100644
+--- a/day1_day6.txt
++++ b/day1_day6.txt
+@@ -698,3 +698,148 @@
+   698  git diff f7a0dd9 day1_day6.txt
+   699  history
+   700  history > day1_day6.txt
++  701  git diff f7a0dd9 day1_day6.txt
++  702  git diff f7a0dd9 day1_day6.txt > day7.txt
++  703  git add .
++  704  git commit -m "Day 7 Lables/annotations, deployment and rolling and jobs":
++  705  git push
++  706  clear
++  707  kubectl explain pod
++  708  kubectl explain pod.spec
++  709  kubectl explain Pod.spec.containers.livenessProbe
++  710  kubectl explain Pod.spec.containers
++  711  kubectl explain Deployment
++  712  kubectl explain metadata
++  713  clear
++  714  cd k8s
++  715  ls
++  716  mkdir day8
++  717  cd day8
++  718  kubectl explain job
++  719  kubectl explain cronjob
++  720  kubectl cronjob -h
++  721  kubectl get cronjob -h
++  722  kubectl create cronjob -h
++  723  vi cron-job.yml
++  724  kubect apply -f cron-job.yml
++  725  kubectl apply -f cron-job.yml
++  726  kubect get cronjob
++  727  kubectl get cronjob
++  728  kubectl get cronjob cleanup-cronjob
++  729  kubectl get cronjob cleanup-cronjob w
++  730  kubectl get cronjob cleanup-cronjob -w
++  731  kubectl get cronjob cleanup-cronjob 
++  732  clear'
++  733  ;
++  734  clear
++  735  kubectl create deployment -
++  736  kubectl create deployment -h
++  737  kubectl create deployment my-dep1 --image=busybox -o yaml --dry-run=true
++  738  kubectl create deployment my-dep1 --image=busybox -o yaml --dry-run=true >my-dep1.yaml
++  739  vi my-dep1.yaml
++  740  kubectl create deployment -h
++  741  kubectl create deployment explain
++  742  kubectl explain deployment
++  743  kubectl create deployment my-dep1 --image=busybox --replicas=3 -o yaml --dry-run=true >my-dep1.yaml
++  744  vi my-dep1.yaml
++  745  ls
++  746  vi my-dep1.yaml
++  747  kubectl create deployment my-dep1 --image=busybox -o yaml --dry-run=true >my-dep1.yaml
++  748  ls
++  749  vi my-dep1.yaml
++  750  kubectl apply -f my-dep1.yaml
++  751  kubectl get pods
++  752  kubectl create service -h
++  753  kubectl create service --help
++  754  kubectl explain service
++  755  clear
++  756  kubectl create service my-ser --dry-run -o yaml > service.yaml
++  757  kubectl create service my-ser --dry-run=true -o yaml > service.yaml
++  758  vi service.yaml
++  759  kubectl get pods --show-labels
++  760  vi service.yaml
++  761  kubectl apply -f service.yaml
++  762  kubectl get services
++  763  kubectl get endpoints
++  764  wget -O canal.yaml https://docs.projectcalico.org/v3.5/getting-started/kubernetes/installation/hosted/canal/canal.yaml
++  765  kubectl apply -f canal.yaml
++  766  clear
++  767  kubectl run explain
++  768  kubectl run network-policy-secure-pod --image=nginx --port:80 --dry-run -o yaml > networkd-pod.yaml
++  769  kubectl run network-policy-secure-pod --image=nginx --port=80 --dry-run -o yaml > networkd-pod.yaml
++  770  ls
++  771  vi network-pod.yaml
++  772  kubectl create pod -h
++  773  vi networkd-pod.yaml
++  774  kubectl apply -f networkd-pod.yaml
++  775  kubectl get pods
++  776  kubectl run network-policy-client-pod --image=busybox --dry-run -o yaml > client-pod.yaml
++  777  vi client-pod.yaml
++  778  kubectl apply -f client-pod.yaml
++  779  kubectl get pods
++  780  kubectl describe netowkr-policy-client-pod-79d498fcd5-qptrf 
++  781  kubectl describe network-policy-client-pod-79d498fcd5-qptrf 
++  782  kubectl describe pod network-policy-client-pod-79d498fcd5-qptrf 
++  783  vi client-pod.yaml
++  784  kubectl apply -f client-pod.yaml
++  785  kubectl get pods
++  786  kubectl get pods -o wide
++  787  kubectl exec network-policy-client-pod-578849d7cb-rqrx6 -- curl 10.244.1.7
++  788  clear
++  789  cd k8s
++  790  git init
++  791  git status
++  792  git commit -am "Day 8 Services, clusterip and nodeport"
++  793  git push 
++  794  mkdir day9
++  795  cd day9
++  796  ls
++  797  clear
++  798  kubectl explain networkpolicy
++  799  clear
++  800  kubectl get pods
++  801  clear
++  802  kubernetes delete -h
++  803  kubectl delete -h
++  804  kubectl delete pods --all
++  805   clear
++  806  kubectl get pods
++  807  kubectl get deployments
++  808  kubectl delete deployments --all
++  809  kubectl get pods
++  810  kubectl get cronjob
++  811  kubectl delete cronjob --all
++  812  kubectl get pods
++  813  clear
++  814  kubectl get pods
++  815  clear
++  816  kubectl run network-policy-secure-pod --image=nginx
++  817  kubectl get deployments
++  818  kubectl delete deployments --all
++  819  kubectl create pod network-policy-secure-pod --image=nginx --dry-run -o yaml > networkpod.yaml
++  820  kubectl run --h
++  821  kubectl get pods
++  822  ls
++  823  vi networkpod.yaml
++  824  kubectl apply -f networkpod.yaml
++  825  vi networkpod.yaml
++  826  kubectl apply -f networkpod.yaml
++  827  kubectl get pods
++  828  cp networkpod.yaml networkclient.yaml
++  829  vi networkclient.yaml
++  830  kubectl apply -f networkclient.yaml
++  831  kubectl get pods -w
++  832  clear
++  833  kubectl get pods
++  834  kubectl get pods -o wide
++  835  kubectl exec network-policy-clientpod -- curl 10.244.1.107
++  836  kubectl exec network-policy-client-pod -- curl 10.244.1.107
++  837  history
++  838  history > day1_day6.txt
++  839  git diff
++  840  git diff --staged
++  841  git status
++  842  git add .
++  843  git diff
++  844  cd ..
++  845  history > day1_day6.txt

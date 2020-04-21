@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: network-policy-secure-pod
+  name: network-policy-secure-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: network-policy-secure-pod
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: network-policy-secure-pod
+    spec:
+      containers:
+      - image: nginx
+        name: network-policy-secure-pod
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

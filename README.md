@@ -84,3 +84,12 @@ kubectl rollout undo deployment/rolling-deployment --to-revision=1
 kubectl get jobs
 kubectl get cronjobs
 ```
+## Day 8
+
+### Services and network policies
+
+- Services are used for providing network access to pods and components whether with in pod to pod via clusterip or to outside world by Nodeport
+```cmd
+kubectl get svc
+kubectl get endpoints my-service
+````

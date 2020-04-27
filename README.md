@@ -93,3 +93,20 @@ kubectl get cronjobs
 kubectl get svc
 kubectl get endpoints my-service
 ````
+
+## Day 9
+
+### Network policies
+
+- network policy can be allowed at pod, namespace or ip level.  
+- the network policy apply to all matching combinations of selector specified such as pod, ns or ip level.
+
+```
+kubectl get networkpolicies
+kubectl describe networkpolicy my-network-policy
+```
+
+### Volume PV PVC
+
+- volume is for storage volume mount to emptydir is like till the node remains. and same volume can be mounted to multiple pods
+- Persistant data store persistent volume nd pvc
